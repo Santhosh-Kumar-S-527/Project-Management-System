@@ -11,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: '*',
+        origin: 'https://project-management-system-0s1d.onrender.com',
         methods: ['GET', 'POST'],
     }
 });
