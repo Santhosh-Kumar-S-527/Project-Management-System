@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://project-management-system-0s1d.onrender.com',
   headers: { 'Content-Type': 'application/json' },
 });
 
