@@ -13,6 +13,7 @@ const io = socketIo(server, {
     cors: {
         origin: 'https://project-management-system-0s1d.onrender.com',
         methods: ['GET', 'POST'],
+        credentials: true,
     }
 });
 
