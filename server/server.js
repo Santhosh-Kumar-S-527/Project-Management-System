@@ -1,76 +1,42 @@
-import express from "express";
-import cors from "cors";
-import http from "http";
-import { Server } from "socket.io";
-import dotenv from "dotenv";
-import connectDB from "./config/db.js";
+const express = require('express');
+const cors = require('cors');
+const http = require('http');
+const socketIo = require('socket.io');
+const connectDB = require('./config/db');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    }
+});
 
-// 🔹 Connect to Database
+// Connect to Database
 connectDB();
 
-// 🔹 Allowed Origins (Frontend URLs)
-const allowedOrigins = [
-  "http://localhost:3000", // local frontend
-  "https://project-management-system-sand.vercel.app/" // 🔁 replace with your Vercel URL
-];
-
-// 🔹 Middleware
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (like Postman)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("CORS not allowed"));
-      }
-    },
-    credentials: true
-  })
-);
-
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// 🔹 Socket.IO Setup
-const io = new Server(server, {
-  cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST"],
-    credentials: true
-  }
+// Socket.io
+app.set('io', io);
+io.on('connection', (socket) => {
+    console.log('New client connected');
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
 });
 
-app.set("io", io);
+// Routes
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/projects', require('./routes/project.routes'));
+app.use('/api/tasks', require('./routes/task.routes'));
+app.use('/api/users', require('./routes/user.routes'));
 
-io.on("connection", (socket) => {
-  console.log("🔌 New client connected:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("❌ Client disconnected:", socket.id);
-  });
-});
-
-// 🔹 Routes
-app.use("/api/auth", (await import("./routes/auth.routes.js")).default);
-app.use("/api/projects", (await import("./routes/project.routes.js")).default);
-app.use("/api/tasks", (await import("./routes/task.routes.js")).default);
-app.use("/api/users", (await import("./routes/user.routes.js")).default);
-
-// 🔹 Health check route
-app.get("/", (req, res) => {
-  res.send("🚀 PMS API Running...");
-});
-
-// 🔹 Start Server
 const PORT = process.env.PORT || 5000;
-
-server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
