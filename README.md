@@ -1,8 +1,10 @@
-# Project Management System (PMS)
+<img width="607" height="516" alt="image" src="https://github.com/user-attachments/assets/15b56f72-a3b3-4574-b9b8-6c5e11a0403f" /># Project Management System (PMS)
 
 A full-stack web application designed for teams to manage projects, tasks, and track overall progress. Built with a modern, responsive user interface and a robust backend.
 
-## 🚀 Features
+Live at https://project-management-system-rho-sandy.vercel.app/
+
+## Features
 
 ### Authentication & Authorization
 * **Role-Based Access Control (RBAC):** Supports different user roles (e.g., Admin, Manager, User).
@@ -20,7 +22,7 @@ A full-stack web application designed for teams to manage projects, tasks, and t
 * **Kanban Board:** Intuitive drag-and-drop interface (using `@hello-pangea/dnd`) for managing task states (To-do, In Progress, Done).
 * **Task Details:** Detailed view for individual tasks with support for comments and file attachments.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 **Frontend:**
 * React 18
@@ -38,7 +40,7 @@ A full-stack web application designed for teams to manage projects, tasks, and t
 * JSON Web Token (jsonwebtoken)
 * Socket.io (for real-time updates - foundational setup)
 
-## 📦 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Node.js (v16 or higher)
@@ -88,7 +90,7 @@ This will launch:
 ### Accessing the App
 Open your web browser and navigate to `http://localhost:3000`. You will be greeted by the login/registration screen to get started.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 pms/
