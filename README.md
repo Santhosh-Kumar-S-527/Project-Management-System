@@ -1,4 +1,4 @@
-<img width="607" height="516" alt="image" src="https://github.com/user-attachments/assets/15b56f72-a3b3-4574-b9b8-6c5e11a0403f" /># Project Management System (PMS)
+# Project Management System (PMS)
 
 A full-stack web application designed for teams to manage projects, tasks, and track overall progress. Built with a modern, responsive user interface and a robust backend.
 
