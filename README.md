@@ -1,4 +1,4 @@
-# Project Management System (PMS)
+# ProManage - Project Management System 
 
 A full-stack web application designed for teams to manage projects, tasks, and track overall progress. Built with a modern, responsive user interface and a robust backend.
 
